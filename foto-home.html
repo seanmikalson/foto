@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-4">
+            <span class="btn btn-default btn-file">
+                Share/Take a Photo!
+                <input type="file" accept="image/*;capture=camera">
+            </span>
+
+        </div>
+        <div class="col-xs-8">
+            <!--Body content-->
+
+            <ul class="phones">
+                <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
+                    {{phone.name}}
+                    <p>{{phone.snippet}}</p>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
