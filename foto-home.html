@@ -1,22 +1,13 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-4">
+    <div class="row" style="padding-top: 20px">
+        <div style="text-align: center">
             <span class="btn btn-default btn-file">
-                Share/Take a Photo!
-                <input type="file" accept="image/*;capture=camera">
+                Take a Photo!
+                <input foto-file-select="" type="file" accept="image/*;capture=camera" >
             </span>
-
-        </div>
-        <div class="col-xs-8">
-            <!--Body content-->
-
-            <ul class="phones">
-                <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
-                    {{phone.name}}
-                    <p>{{phone.snippet}}</p>
-                </li>
-            </ul>
-
+            <div>
+                <img ng-src="{{fileData}}" ng-show="fileData" class="thumb">
+            </div>
         </div>
     </div>
 </div>

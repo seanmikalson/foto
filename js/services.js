@@ -1,8 +1,9 @@
-var fotoServices = angular.module('fotoServices', ['ngResource']);
+var fotoServices = angular.module('fotoServices', []);
 
-fotoServices.factory('Phone', ['$resource',
-    function($resource){
-        return $resource('phones/:phoneId.json', {}, {
-            query: {method:'GET', params:{phoneId:'phones'}, isArray:true}
-        });
-    }]);
+fotoServices.factory('Foto', ['$http', function($http) {
+    return {
+        share: function(data) {
+            console.log('here');
+            $http({method:'POST', url:'http://localhost:3000/', data:{body:'hello'}});
+        }
+    }}]);
