@@ -1,7 +1,7 @@
 var fotoApp = angular.module('fotoControllers', []);
 
 fotoApp.controller('FotoHomeCtrl', ['$scope', '$http', function ($scope, $http) {
-        $http.get('http://localhost:3000').success(function(data, status, headers,config) {
+        $http.get('http://sleepy-cliffs-7844.herokuapp.com').success(function(data, status, headers,config) {
             console.log('got pictures');
             $scope.pictures = data;
         });
@@ -20,12 +20,12 @@ fotoApp.directive('fotoFileSelect', ['Foto','$http', function(Foto, $http) {
                     // Render thumbnail.
                     $scope.fileData = e.target.result;
                     $scope.$apply();
-                    $http.post('http://localhost:3000',{data:$scope.fileData}, {headers:{'Access-Control-Allow-Origin':'http://localhost:8080'}});
+                    $http.post('http://sleepy-cliffs-7844.herokuapp.com',{data:$scope.fileData}, {headers:{'Access-Control-Allow-Origin':'http://localhost:8080'}});
                 };
 
                 fileReader.readAsDataURL($scope.file);
 
-                $http.get('http://localhost:3000').success(function(data, status, headers,config) {
+                $http.get('http://sleepy-cliffs-7844.herokuapp.com').success(function(data, status, headers,config) {
                     console.log('got pictures');
                     $scope.pictures = data;
                 });
