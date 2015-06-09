@@ -1,12 +1,10 @@
 var fotoApp = angular.module('fotoControllers', []);
 
-fotoApp.controller('FotoHomeCtrl', ['$scope', function ($scope) {
-
-    }]);
-
-fotoApp.controller('PhoneDetailCtrl', ['$scope', '$routeParams',
-    function($scope, $routeParams) {
-        $scope.phoneId = $routeParams.phoneId;
+fotoApp.controller('FotoHomeCtrl', ['$scope', '$http', function ($scope, $http) {
+        $http.get('http://localhost:3000').success(function(data, status, headers,config) {
+            console.log('got pictures');
+            $scope.pictures = data;
+        });
     }]);
 
 fotoApp.directive('fotoFileSelect', ['Foto','$http', function(Foto, $http) {
@@ -26,6 +24,11 @@ fotoApp.directive('fotoFileSelect', ['Foto','$http', function(Foto, $http) {
                 };
 
                 fileReader.readAsDataURL($scope.file);
+
+                $http.get('http://localhost:3000').success(function(data, status, headers,config) {
+                    console.log('got pictures');
+                    $scope.pictures = data;
+                });
             });
         }
     }

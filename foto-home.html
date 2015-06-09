@@ -5,8 +5,8 @@
                 Take a Photo!
                 <input foto-file-select="" type="file" accept="image/*;capture=camera" >
             </span>
-            <div>
-                <img ng-src="{{fileData}}" ng-show="fileData" class="thumb">
+            <div ng-repeat="data in pictures">
+                <img ng-src="{{data.data}}" class="thumb">
             </div>
         </div>
     </div>

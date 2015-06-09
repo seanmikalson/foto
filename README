@@ -1,0 +1,5 @@
+# Start a the website
+http-server start
+
+# Start server
+node server.js
