@@ -1,31 +1,38 @@
 var fotoApp = angular.module('fotoControllers', []);
 
 fotoApp.controller('FotoHomeCtrl', ['$scope', '$http', function ($scope, $http) {
-        $http.get('http://sleepy-cliffs-7844.herokuapp.com').success(function(data, status, headers,config) {
-            console.log('got pictures');
-            $scope.pictures = data;
-        });
-    }]);
+    $http.get(config.url).success(function(data, status, headers,config) {
+        console.log('got pictures');
+        $scope.pictures = data;
+    });
 
-fotoApp.directive('fotoFileSelect', ['Foto','$http', function(Foto, $http) {
+    $scope.onImageClicked = function(data) {
+        $scope.current_picture = data;
+    }
+}]);
+
+fotoApp.directive('fotoFileSelect', ['$http', function($http) {
     return {
         link: function($scope, el, attrs) {
             el.bind('change', function(e) {
                 console.log('file selected');
                 $scope.file = e.target.files[0];
-                fileReader = new FileReader();
+                var fileReader = new FileReader();
 
-                fileReader.onload = function(e) {
-                    console.log('loaded');
-                    // Render thumbnail.
-                    $scope.fileData = e.target.result;
+                fileReader.onload = function(evt) {
+                    var image = new Image();
+                    console.log(evt.target.result);
+                    image.src = evt.target.result;
+                    console.log(image.width);
+                    $scope.pictures.push[{data:image.src}];
+                    var cmpImage = compress(image);
                     $scope.$apply();
-                    $http.post('http://sleepy-cliffs-7844.herokuapp.com',{data:$scope.fileData}, {headers:{'Access-Control-Allow-Origin':'http://localhost:8080'}});
+                    $http.post(config.url,{data:cmpImage.src});
                 };
 
                 fileReader.readAsDataURL($scope.file);
 
-                $http.get('http://sleepy-cliffs-7844.herokuapp.com').success(function(data, status, headers,config) {
+                $http.get(config.url).success(function(data, status, headers,config) {
                     console.log('got pictures');
                     $scope.pictures = data;
                 });

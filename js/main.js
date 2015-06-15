@@ -1,8 +1,7 @@
 
 var fotoApp = angular.module('fotoApp', [
     'ngRoute',
-    'fotoControllers',
-    'fotoServices'
+    'fotoControllers'
 ]);
 
 fotoApp.config(['$routeProvider',
