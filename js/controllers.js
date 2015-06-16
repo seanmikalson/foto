@@ -6,7 +6,21 @@ fotoApp.controller('FotoHomeCtrl', ['$scope', '$http', function ($scope, $http) 
     });
 
     $scope.onImageClicked = function(data) {
-        $scope.current_picture = data;
+        $scope.current_picture = $scope.pictures.indexOf(data);
+    };
+
+    $scope.onSwipeRight = function() {
+        $scope.current_picture++;
+        if($scope.current_picture >= $scope.pictures.length) {
+            $scope.current_picture = 0;
+        }
+    };
+
+    $scope.onSwipeLeft = function() {
+        $scope.current_picture--;
+        if($scope.current_picture < 0) {
+            $scope.current_picture = $scope.pictures.length - 1;
+        }
     };
 }]);
 
@@ -23,9 +37,9 @@ fotoApp.directive('fotoFileSelect', ['$http', function($http) {
                     image.src = fileReader.result;
 
                     $scope.$apply(function() {
-                        $scope.pictures.push({data:image.src});
-
                         var cmpImage = compress(image);
+                        $scope.pictures.push({data:cmpImage.src});
+
                         $http.post(config.url,{data:cmpImage.src}).success(function() {
                             button.button('reset');
                             el.val(null);

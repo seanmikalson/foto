@@ -1,7 +1,8 @@
 
 var fotoApp = angular.module('fotoApp', [
     'ngRoute',
-    'fotoControllers'
+    'fotoControllers',
+    'ngTouch'
 ]);
 
 fotoApp.config(['$routeProvider',
