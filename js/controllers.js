@@ -7,29 +7,30 @@ fotoApp.controller('FotoHomeCtrl', ['$scope', '$http', function ($scope, $http) 
 
     $scope.onImageClicked = function(data) {
         $scope.current_picture = data;
-    }
+    };
 }]);
 
 fotoApp.directive('fotoFileSelect', ['$http', function($http) {
     return {
         link: function($scope, el, attrs) {
-            el.bind('change', function(e) {
+            el.on('change', function(e) {
                 var button = $('.btn-file').button('sharing');
-                console.log('file selected');
                 $scope.file = e.target.files[0];
                 var fileReader = new FileReader();
 
                 fileReader.onload = function(evt) {
-                    button.button('reset');
                     var image = new Image();
-                    image.src = evt.target.result;
+                    image.src = fileReader.result;
 
                     $scope.$apply(function() {
                         $scope.pictures.push({data:image.src});
-                    });
 
-                    var cmpImage = compress(image);
-                    $http.post(config.url,{data:cmpImage.src});
+                        var cmpImage = compress(image);
+                        $http.post(config.url,{data:cmpImage.src}).success(function() {
+                            button.button('reset');
+                            el.val(null);
+                        });
+                    });
                 };
 
                 fileReader.readAsDataURL($scope.file);

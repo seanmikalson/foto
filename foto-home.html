@@ -10,9 +10,9 @@
 <div class="container-fluid">
     <div class="row" style="padding-top: 20px">
         <div style="text-align: center">
-            <span class="btn btn-default btn-file" data-sharing-text="Sharing...">
+            <span class="btn btn-default btn-file" data-sharing-text="Sharing..." foto-file-select="">
                 Take a Photo!
-                <input foto-file-select="" type="file" accept="image/*;capture=camera" >
+                <input id="fileinput" type="file" accept="image/*;capture=camera">
             </span>
             <div ng-repeat="data in pictures">
                 <span class="btn" data-target="#largeImageDisplay" data-toggle="modal" ng-click="onImageClicked(data)">
